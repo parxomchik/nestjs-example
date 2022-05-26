@@ -1,0 +1,136 @@
+{
+  "name": "podil-back-end",
+  "version": "0.0.3",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \\\"src/**/*.ts\\\" \\\"test/**/*.ts\\\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "nest build && node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "pretypeorm": "(rm ormconfig.json || :) && dotenv -e .env ts-node -r tsconfig-paths/register src/config/type-orm-config.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm:migration:create": "npm run typeorm -- migration:create -n",
+    "typeorm:migration:generate": "npm run typeorm -- migration:generate -n",
+    "typeorm:migration:run": "npm run typeorm -- migration:run",
+    "pretypeorm:migration:server": "node config/type-orm-config.server.js",
+    "typeorm:migration:server": "./node_modules/typeorm/cli.js migration:run"
+  },
+  "dependencies": {
+    "@nestjs/common": "7.4.4",
+    "@nestjs/config": "0.5.0",
+    "@nestjs/core": "7.4.4",
+    "@nestjs/jwt": "^7.2.0",
+    "@nestjs/passport": "^7.1.5",
+    "@nestjs/platform-express": "7.4.4",
+    "@nestjs/swagger": "4.6.1",
+    "@nestjs/testing": "7.4.4",
+    "@nestjs/typeorm": "^7.1.5",
+    "bcrypt": "5.0.0",
+    "class-transformer": "0.2.3",
+    "class-validator": "0.12.2",
+    "express": "4.17.1",
+    "husky": "4.3.0",
+    "ioredis": "^4.19.2",
+    "migrate": "^1.7.0",
+    "module-alias": "2.2.2",
+    "nestjs-redis": "^1.2.8",
+    "open": "7.2.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.5.1",
+    "read-excel-file": "^5.0.0",
+    "reflect-metadata": "0.1.13",
+    "rimraf": "3.0.2",
+    "rxjs": "6.6.3",
+    "swagger-ui-express": "4.1.4",
+    "ts-node": "^8.10.2",
+    "typeorm": "^0.2.31"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "7.5.1",
+    "@nestjs/schematics": "7.1.2",
+    "@types/bcrypt": "3.0.0",
+    "@types/express": "4.17.8",
+    "@types/jest": "25.2.3",
+    "@types/node": "13.9.1",
+    "@types/passport-jwt": "^3.0.3",
+    "@types/passport-local": "^1.0.33",
+    "@types/supertest": "2.0.8",
+    "@typescript-eslint/eslint-plugin": "4.5.0",
+    "@typescript-eslint/parser": "4.5.0",
+    "cz-conventional-changelog": "3.2.0",
+    "dotenv-cli": "^4.0.0",
+    "eslint": "7.10.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-airbnb-typescript": "11.0.0",
+    "eslint-config-prettier": "6.12.0",
+    "eslint-plugin-import": "2.22.1",
+    "jest": "26.4.2",
+    "prettier": "2.1.2",
+    "supertest": "4.0.2",
+    "ts-jest": "26.4.1",
+    "ts-loader": "6.2.2",
+    "tsconfig-paths": "3.9.0",
+    "typescript": "4.0.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@shared(.*)$": "<rootDir>/components/shared$1",
+      "^@components(.*)$": "<rootDir>/components$1",
+      "^@filters(.*)$": "<rootDir>/filters$1",
+      "^@guards(.*)$": "<rootDir>/guards$1",
+      "^@interfaces(.*)$": "<rootDir>/interfaces$1",
+      "^@pipes(.*)$": "<rootDir>/pipes$1",
+      "^@dto(.*)$": "<rootDir>/dto$1",
+      "^@responses(.*)$": "<rootDir>/responses$1",
+      "^@interceptors(.*)$": "<rootDir>/interceptors$1",
+      "^@decorators(.*)$": "<rootDir>/decorators$1"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "_moduleAliases": {
+    "@shared": "./dist/components/shared",
+    "@components": "./dist/components",
+    "@filters": "./dist/filters",
+    "@guards": "./dist/guards",
+    "@interfaces": "./dist/interfaces",
+    "@pipes": "./dist/pipes",
+    "@dto": "./dist/dto",
+    "@responses": "./dist/responses",
+    "@interceptors": "./dist/interceptors",
+    "@decorators": "./dist/decorators"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  }
+}
